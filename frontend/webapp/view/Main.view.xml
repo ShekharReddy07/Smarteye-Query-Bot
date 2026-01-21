@@ -1,0 +1,61 @@
+<mvc:View
+    controllerName="attendance.bot.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:ui="sap.ui.table">
+
+    <App>
+        <Page title="SmartEye Query Bot!!!">
+            <content>
+                <l:VerticalLayout width="100%" class="sapUiContentPadding">
+
+                    <TextArea
+                        id="questionInput"
+                        value="{/question}"
+                        placeholder="Type your question here…"
+                        rows="3"
+                        width="100%" />
+
+                    <HBox class="sapUiSmallMarginTop">
+                        <Button text="Ask" type="Emphasized" press=".onAsk"/>
+                        <Button text="Clear" class="sapUiSmallMarginBegin" press=".onClear"/>
+                        <Button text="Test Sample" class="sapUiSmallMarginBegin" type="Accept" press=".onTestSample"/>
+                    </HBox>
+
+                    <List
+                        id="chatList"
+                        class="sapUiSmallMarginTop"
+                        items="{ path: '/messages' }">
+
+                        <CustomListItem>
+                            <VBox class="sapUiTinyMargin">
+                                <ObjectStatus
+                                    text="{= ${role} === 'user' ? 'You' : 'Bot' }"
+                                    state="{= ${role} === 'user' ? 'Information' : 'Success'}" />
+                                <Text
+                                    text="{text}"
+                                    wrapping="true"
+                                    class="sapUiTinyMarginTop"/>
+                            </VBox>
+                        </CustomListItem>
+
+                    </List>
+
+                    <!-- ✅ FIXED TABLE (Desktop Table) -->
+                    <ui:Table
+                        id="resultsTable"
+                        class="sapUiSmallMarginTop"
+                        rows="{results>/rows}"
+                        visibleRowCount="10"
+                        selectionMode="None"
+                        width="100%"
+                        enableColumnReordering="true">
+                    </ui:Table>
+
+                </l:VerticalLayout>
+            </content>
+        </Page>
+    </App>
+
+</mvc:View>
